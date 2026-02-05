@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /src/
-Sitemap: https://ahelpviewer.github.io/sitemap.xml
+Sitemap: https://helpviewer.github.io/s/sitemap.xml
 Disallow: /keywordList/
 Disallow: /fulltextList/
