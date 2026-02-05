@@ -1,0 +1,70 @@
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CORS policy</title><meta name="description" content="Do you see the page with “⚠ Do you see this message only?”? Then the browser is not loading the data from the ZIP help file.This may be caused by your browser b"><link rel="icon" type="image/png" href="favicon.png"><meta property="og:title" content="CORS policy"><meta property="og:description" content="Do you see the page with “⚠ Do you see this message only?”? Then the browser is not loading the data from the ZIP help file.This may be caused by your browser b"><meta property="og:type" content="website"><meta property="og:image" content="favicon.png"><meta name="robots" content="index,follow"><link rel="stylesheet" href="src/i-formsupport-css.css" type="text/css"><link rel="stylesheet" href="src/mainCSS.css" type="text/css"><link rel="stylesheet" href="src/mainCSSPlus.css" type="text/css"><link rel="stylesheet" href="src/addition-puiWatermark-toc.css" type="text/css"><link rel="stylesheet" href="src/overridePlusMinusVars.css" type="text/css"><link rel="stylesheet" href="src/prism/prism.css.css" type="text/css"><link rel="stylesheet" href="src/prism/override.css.css" type="text/css"><link rel="stylesheet" href="src/TPL-HTML-fixes.css" type="text/css"><link rel="stylesheet" href="src/custom.css" type="text/css"><meta name="keywords" content="cors, deployment, restrictions, troubleshooting"></head><body class="inStandard"><div class="container" id="container"><div class="main" id="main"><div class="header" id="header" role="banner"><h1 id="mtitle">CORS policy</h1><div id="header-toolbar" class="toolbar" role="toolbar"><a id="printBtn" title="Print page" aria-label="Print page" href="javascript:window.print();">🖨️</a><a id="nav-left" title="Previous topic" aria-label="Previous topic" href="_viewRepo.htm">⬅</a><a id="nav-right" title="Next topic" aria-label="Next topic" href="keywordList/index.htm">➡</a><a id="downP-TopicTree" title="Table of Contents" aria-label="Table of Contents" href="toc.htm">📖</a><a id="downP-Glossary" title="Glossary" aria-label="Glossary" href="keywordList/index.htm">📇</a><a id="downP-Fulltext" title="Fulltext search" aria-label="Fulltext search" href="fulltextList/index.htm">🔎</a><a id="downP-Home" title="Home" aria-label="Home" href="index.htm">🏡</a></div></div><div class="content" id="content" role="main" aria-live="polite"><p>Do you see the page with “⚠ Do you see this message only?”? Then the browser is not loading the data from the ZIP help file.<br>This may be caused by your browser blocking local file access (file://) due to CORS policy restrictions. </p><p>You have 2 options on how to proceed:</p><ol><li>In the <strong>data.zip</strong> and <strong>Help-(language).zip</strong> fields, select the necessary files and click <strong>Submit</strong>.</li><li>You need to run your browser in mode with bypass CORS policy:</li></ol><ul><li><p>Chrome:</p><blockquote><p>Run in CLI:<br>chrome.exe --disable-site-isolation-trials --disable-web-security --user-data-dir="C:\temp"</p></blockquote></li><li><p>Edge:</p><blockquote><p>Run in CLI:<br>msedge --disable-web-security --user-data-dir="C:\temp"</p></blockquote></li></ul><script>
+  insertDownloadLink('linkhereI');
+</script><script>
+function _init() {
+  const valH1 = '_viewRepo-h1';
+  const translateThis = [valH1, '_viewRepo-par1', '_viewRepo-par2', '_viewRepo-link'];
+
+  translateThis.forEach(id => {
+    var idField = id;
+    if (id === valH1) idField = 'mtitle';
+    var el = $(idField);
+    if (el) el.innerHTML = _T(id);
+  });
+
+  const fieldOrg = '_viewRepo-org';
+  const fieldRepo = '_viewRepo-repo';
+  const fieldBranch = '_viewRepo-branch';
+  const fieldLanguages = '_viewRepo-langs';
+  const fieldZIP = '_viewRepo-zip';
+  
+  const formO = $('form');
+
+  appendField(formO, fieldOrg, '');
+  appendField(formO, fieldRepo, '');
+  appendField(formO, fieldBranch, 'master');
+  appendField(formO, fieldLanguages, true, FormFieldType.CHECKBOX);
+  appendField(formO, fieldZIP, '', FormFieldType.CHECKBOX);
+
+  const iorg = $(fieldOrg);
+  const irepo = $(fieldRepo);
+  const ibranch = $(fieldBranch);
+  const ilangs = $(fieldLanguages);
+  const izip = $(fieldZIP);
+
+  const onBlur = updateLink;
+  const eventName = 'change';
+
+  iorg.addEventListener(eventName, onBlur);
+  irepo.addEventListener(eventName, onBlur);
+  ibranch.addEventListener(eventName, onBlur);
+  ilangs.addEventListener(eventName, onBlur);
+  izip.addEventListener(eventName, (event) => {
+    const sender = event.target;
+    if (!sender.value || sender.checked === false) return;
+    ibranch.value = getDateInYYYYMMDD(new Date()) 
+  });
+  izip.addEventListener(eventName, onBlur);
+  
+  function updateLink() {
+    const org = iorg.value.trim();
+    const repo = irepo.value.trim();
+    const branch = ibranch.value.trim();
+    const langs = ilangs.checked;
+    const zip = izip.checked;
+  
+    const span = $("previewLink");
+  
+    if (org && repo) {
+      var url = (zip && zip !== 'off') 
+        ? getHelpRepoUriReleaseZip(org, repo, branch)
+        : getHelpRepoUri(org, repo, langs, branch);
+      url = `?d=${url}`;
+      span.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+    } else {
+      span.textContent = "";
+    }
+  }
+}
+_init();
+</script></div></div></div></body></html>

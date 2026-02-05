@@ -1,0 +1,30 @@
+.line-numbers-rows {
+	position: absolute;
+	top: 0.7em;
+	margin-left: -3em;
+}
+
+.code-toolbar pre {
+	margin-left: 3em;
+}
+
+.copy-to-clipboard-button {
+	display: none;
+}
+
+div .code-toolbar .toolbar-item {
+	position: unset;
+}
+
+div.toolbar {
+	font-size: 1.5em;
+	background-color: transparent;
+	position: sticky;
+}
+
+div.toolbar a {
+	text-decoration: none;
+	min-width: 1em;
+	text-align: center;
+	padding-right: 0.1em
+}

@@ -1,0 +1,19 @@
+:not(pre)>code[class*=language-],pre[class*=language-]{background:unset}
+
+pre[class*="language-"] {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  
+  pre[class*="language-"] > code {
+    white-space: pre-wrap;
+  }
+  
+  span .token {
+    background-color: transparent;
+  }
+
+.token.operator {
+  background-color: transparent;
+}
